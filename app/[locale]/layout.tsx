@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
-import { createTranslator, NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider } from "next-intl";
 import { ReactNode } from "react";
 import Header from "../components/Header";
 
@@ -21,16 +21,6 @@ async function getMessages(locale: string) {
 
 export async function generateStaticParams() {
   return [{ locale: "uz" }, { locale: "en" }, { locale: "ru" }];
-}
-
-export async function generateMetadata({ params: { locale } }: Props) {
-  const messages = await getMessages(locale);
-
-  const t = createTranslator({ locale, messages });
-
-  return {
-    title: t("LocaleLayout.title"),
-  };
 }
 
 export default async function RootLayout({
